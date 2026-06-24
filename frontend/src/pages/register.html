@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Motorepuestos</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container container-auth">
+        <div class="card">
+            <h1>⚙️ Motorepuestos</h1>
+            <h2>Crear Cuenta</h2>
+
+            <form id="register-form">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" id="nombre" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="email" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña:</label>
+                    <input type="password" id="password" required placeholder="Mínimo 6 caracteres">
+                </div>
+
+                <p id="register-error" class="error-msg"></p>
+                <p id="register-success" class="success-msg"></p>
+
+                <button type="submit">Crear Cuenta</button>
+            </form>
+
+            <p class="auth-link">¿Ya tenés cuenta? <a href="/index.html">Iniciar sesión</a></p>
+        </div>
+    </div>
+
+    <script type="module" src="../register.js"></script>
+</body>
+</html>
