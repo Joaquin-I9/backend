@@ -29,12 +29,13 @@
 
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { verificarToken, verificarRol } from '../middlewares/authMiddleware.js';
 
 const router = Router();
 const prisma = new PrismaClient();
 
 // 1. LEER: Obtener todos (GET)
-router.get('/repuestos', async (req, res, ) => {
+router.get('/repuestos', verificarToken, async (req, res) => {
   try {
     const repuestos = await prisma.repuesto.findMany();
     res.json(repuestos);
@@ -44,7 +45,7 @@ router.get('/repuestos', async (req, res, ) => {
 });
 
 // 2. CREAR: Alta de un repuesto (POST)
-router.post('/repuestos', async (req, res) => {
+router.post('/repuestos',verificarToken,verificarRol('ADMIN', 'SUPERADMIN'),async (req, res) => {
   const { nombre, marca, precio, stock } = req.body;
 
   if (!nombre || nombre.trim() === "" || !marca || marca.trim() === "") {
@@ -70,7 +71,7 @@ router.post('/repuestos', async (req, res) => {
 });
 
 // 3. ACTUALIZAR: Editar un repuesto (PUT)
-router.put('/repuestos/:id', async (req, res) => {
+router.put('/repuestos/:id',verificarToken,verificarRol('ADMIN', 'SUPERADMIN'),async (req, res) => {
   const { id } = req.params;
   const { nombre, marca, precio, stock } = req.body;
 
@@ -94,7 +95,7 @@ router.put('/repuestos/:id', async (req, res) => {
 });
 
 // 4. ELIMINAR: Borrar un repuesto (DELETE)
-router.delete('/repuestos/:id', async (req, res) => {
+router.delete('/repuestos/:id',verificarToken,verificarRol('ADMIN', 'SUPERADMIN'),async (req, res) => {
   const { id } = req.params;
 
   try {
